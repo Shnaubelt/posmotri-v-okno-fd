@@ -14,7 +14,7 @@ html {
   block-size: 100%;
   margin: auto;
   color: #fff;
-  font-family: "Fira Sans Condensed", sans-serif;
+  font-family: 'Fira Sans Condensed', sans-serif;
   font-size: 18px;
   background-color: #1b1919;
   align-items: center;
@@ -67,6 +67,7 @@ ol {
   display: flex;
   align-items: flex-end;
   width: 1140px;
+  height: 534px;
   gap: 30px;
 }
 
@@ -87,6 +88,7 @@ ol {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  height: 54px;
 }
 
 .search-form__fieldset {
@@ -100,51 +102,64 @@ ol {
   font-size: 18px;
   font-weight: 400;
   line-height: 1;
-  /* отступы? */
+
 }
 
 .search-form__label {
   display: flex;
   align-items: center;
   width: fit-content;
+  gap: 5px;
 }
 
-.search-form__label:has(search-form__pseudo-checkbox) {
-  /* проверить тут ли нужен курсор */
+.search-form__label:has(.search-form__pseudo-checkbox) {
   cursor: pointer;
+}
+
+.search-form__label:focus-visible {
+  outline: none;
 }
 
 .search-form__label:has(:focus-visible) {
   outline: 1px solid #fff;
+  outline-style: solid;
+  outline-offset: 2px;
 }
 
-/* Декорируйте текст чекбокса — сделайте так, чтобы при наведении на чекбокс у текста появлялось подчёркивание. надо посмотреть как это сделать*/
 .search-form__label:hover .search-form__label-text {
-  /* наверное не так */
   text-decoration: underline;
 }
 
-input[text] {
-  /* Задайте стиль текстовому полю. какой стиль?*/
-  border: 1px 0 solid;
-  border: #fff;
+input[type='text'] {
+  border: none;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
   color: #fff;
-  background-color: transparent; /* проверить значение */
+  background-color: transparent;
   appearance: none;
+  padding: 2.5px;
+  min-width: 225px;
+  height: 27px;
 }
 
-/*  Факультативный шаг. Когда элемент в фокусе — добавьте границу вокруг с использованием outline. проверить этот шаг*/
+input[type='text']:focus-visible  {
+  outline: none;
+}
 
-input[text]:focus-visible {
-  border: none;
+input[type='text']:focus  {
+  outline: none;
 }
 
 .search-form__textfield::placeholder {
+  font-family: 'Fira Sans Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
   color: rgb(255 255 255 / 0.7);
 }
 
 .search-form__checkbox-list {
   display: flex;
+  gap: 15px;
 }
 
 .search-form__pseudo-checkbox {
@@ -152,6 +167,7 @@ input[text]:focus-visible {
   height: 19px;
   border: 1px solid #fff;
   padding: 1px;
+  background-color: transparent;
 }
 
 .search-form__pseudo-checkbox::after {
@@ -163,7 +179,7 @@ input[text]:focus-visible {
   opacity: 0;
 }
 
-.search-form__pseudo-checkbox::after:has(.search-form__checkbox:checked) {
+.search-form__checkbox:checked + ::after {
   opacity: 1;
 }
 
@@ -196,11 +212,13 @@ input[text]:focus-visible {
 }
 
 .button:focus {
-  outline: none; /* проверить это свойство, правильно ли я поняла убрать стандартную обводку */
+  outline: none;
 }
 
 .button:focus-visible {
   outline: 1px solid #fff;
+  outline-style: solid;
+  outline-offset: 2px;
 }
 
 .content__details {
@@ -208,7 +226,7 @@ input[text]:focus-visible {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 23px;
 }
 
 .title {
@@ -235,7 +253,7 @@ input[text]:focus-visible {
 .content__list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
 }
 
 .content__list-item {
@@ -255,6 +273,7 @@ input[text]:focus-visible {
 
 .content__card-link:hover {
   text-decoration: underline;
+  
 }
 
 .content__card-link:active {
@@ -283,11 +302,9 @@ input[text]:focus-visible {
 
 .content__video-card-title {
   max-width: 196px;
-  -webkit-line-clamp: 1;
-	line-clamp: 1;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+	overflow-x: clip;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-family: Oswald, sans-serif;
   font-size: 30px;
   font-weight: 700;
@@ -298,11 +315,10 @@ input[text]:focus-visible {
 
 .content__video-card-description {
   max-width: 196px;
+  display: -webkit-box;
   -webkit-line-clamp: 4;
-	line-clamp: 4;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
   line-height: 16.2px;
   font-weight: 400;
 }
